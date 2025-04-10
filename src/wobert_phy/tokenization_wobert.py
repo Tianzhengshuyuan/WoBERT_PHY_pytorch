@@ -17,9 +17,8 @@ class CustomBasicTokenizer(BasicTokenizer):
 
         self.vocab = vocab
         
-        # 如果传入了自定义词典路径，加载自定义词汇到 jieba
-        if custom_word_dict:
-            jieba.load_userdict(custom_word_dict)
+        self.custom_word_dict = custom_word_dict
+
 
     def _tokenize_chinese_chars(self, text):
         output = []
@@ -28,6 +27,11 @@ class CustomBasicTokenizer(BasicTokenizer):
         2、遍历各个wi，如果wi在词表中则保留，否则将wi用BERT自带的tokenize函数再分一次；
         3、将每个wi的tokenize结果有序拼接起来，作为最后的tokenize结果。
         '''
+        
+        if self.custom_word_dict is not None:
+            # 加载自定义词典
+            jieba.load_userdict(self.custom_word_dict)
+            
         for wholeword in jieba.cut(text, HMM=False):
             if wholeword in self.vocab:
                 output.append(" ")
