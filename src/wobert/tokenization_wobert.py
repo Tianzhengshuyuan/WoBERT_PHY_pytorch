@@ -45,7 +45,7 @@ class CustomBasicTokenizer(BasicTokenizer):
         return "".join(output)
 
 
-class WoBert_phy_Tokenizer(BertTokenizer):
+class WoBertPhyTokenizer(BertTokenizer):
     def __init__(self,
                  vocab_file,
                  custom_word_dict=None,
