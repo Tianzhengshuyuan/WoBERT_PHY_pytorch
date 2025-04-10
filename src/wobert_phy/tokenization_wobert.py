@@ -31,7 +31,7 @@ class CustomBasicTokenizer(BasicTokenizer):
         if self.custom_word_dict is not None:
             # 加载自定义词典
             jieba.load_userdict(self.custom_word_dict)
-            
+            print("load user dict from {}".format(self.custom_word_dict))
         for wholeword in jieba.cut(text, HMM=False):
             if wholeword in self.vocab:
                 output.append(" ")
