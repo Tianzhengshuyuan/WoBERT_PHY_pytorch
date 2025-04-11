@@ -33,14 +33,7 @@ class CustomBasicTokenizer(BasicTokenizer):
             jieba.load_userdict(self.custom_word_dict)
             print("load user dict from {}".format(self.custom_word_dict))
 
-        # 打印 custom_word_dict 文件的内容
-            try:
-                with open(self.custom_word_dict, 'r', encoding='utf-8') as f:
-                    print("Custom Word Dictionary Content:")
-                    for line in f:
-                        print(line.strip())  # 打印每一行内容
-            except Exception as e:
-                print(f"Error reading custom_word_dict: {e}")
+
         for wholeword in jieba.cut(text, HMM=False):
             if wholeword in self.vocab:
                 output.append(" ")
